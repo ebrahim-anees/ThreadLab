@@ -23,6 +23,11 @@ import UnAuth from './pages/error/UnAuth';
 import { useSelector } from 'react-redux';
 import useAuthChecker from './hooks/useAuthChecker';
 import Loading from './pages/view/loading';
+import PaypalReturn from './pages/view/shop/paypal/paypalReturn';
+import PaypalCancel from './pages/view/shop/paypal/paypalCancel';
+import PaymentSuccess from './pages/view/shop/paypal/paymentSuccess';
+import PaymentFailed from './pages/view/shop/paypal/paymentFailed';
+import ShoppingSearch from './pages/view/shop/search';
 
 export default function App() {
   const { isLoading, hasCheckedAuthOnce, isAuthenticated } = useSelector(
@@ -74,6 +79,13 @@ export default function App() {
           <URL path="checkout" element={<ShoppingCheckout />} />
           <URL path="home" element={<ShoppingHome />} />
           <URL path="listing" element={<ShoppingListing />} />
+          <URL path="search" element={<ShoppingSearch/>} />
+          <URL path="paypal">
+            <URL path="return" element={<PaypalReturn />} />
+            <URL path="cancel" element={<PaypalCancel />} />
+          </URL>
+          <URL path="paymentSuccess" element={<PaymentSuccess />} />
+          <URL path="paymentFailed" element={<PaymentFailed />} />
         </URL>
         <URL path="*" element={<NotFound />} />
         <URL path="/unauth" element={<UnAuth />} />

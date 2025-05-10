@@ -1,5 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+const serverURL = import.meta.env.VITE_SERVER_URL;
+
 const initialState = {
   isAuthenticated: false,
   isLoading: true,
@@ -16,7 +18,7 @@ export const registerUser = createAsyncThunk(
   async (registerFormData, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/register`,
+        `${serverURL}/auth/register`,
         registerFormData,
         { withCredentials: true } /// Allows cookies
       );
@@ -30,11 +32,9 @@ export const loginUser = createAsyncThunk(
   'auth/login',
   async (loginFormData, { rejectWithValue }) => {
     try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/login`,
-        loginFormData,
-        { withCredentials: true }
-      );
+      const res = await axios.post(`${serverURL}/auth/login`, loginFormData, {
+        withCredentials: true,
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -46,7 +46,7 @@ export const logoutUser = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_SERVER_URL}/auth/logout`,
+        `${serverURL}/auth/logout`,
         {},
         { withCredentials: true }
       );
@@ -60,16 +60,13 @@ export const checkAuth = createAsyncThunk(
   'auth/checkAuth',
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get(
-        `${import.meta.env.VITE_SERVER_URL}/auth/checkAuth`,
-        {
-          withCredentials: true,
-          headers: {
-            'Cache-Control':
-              'no-store, no-cache, must-revalidate, proxy-revalidate',
-          },
-        }
-      );
+      const res = await axios.get(`${serverURL}/auth/checkAuth`, {
+        withCredentials: true,
+        headers: {
+          'Cache-Control':
+            'no-store, no-cache, must-revalidate, proxy-revalidate',
+        },
+      });
       return res.data;
     } catch (error) {
       return rejectWithValue(error.response.data);

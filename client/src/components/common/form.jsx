@@ -15,8 +15,8 @@ export default function CommonForm({
   formData,
   setFormData,
   handleSubmit,
-  buttonText,
-  isImgLoading,
+  buttonText = 'Submit',
+  isBtnDisabled = false,
 }) {
   function renderInputByCompType(controlItem) {
     const name = controlItem.name;
@@ -48,13 +48,13 @@ export default function CommonForm({
             }
             value={value}
           >
-            <SelectTrigger className="w-full ">
+            <SelectTrigger className="w-full cursor-pointer">
               <SelectValue placeholder={controlItem.label} />
             </SelectTrigger>
             <SelectContent>
               {controlItem?.options.length > 0 &&
                 controlItem.options.map((optionItem) => (
-                  <SelectItem key={optionItem.id} value={optionItem.id}>
+                  <SelectItem key={optionItem.id} value={optionItem.id} className='cursor-pointer hover:bg-accent'>
                     {optionItem.label}
                   </SelectItem>
                 ))}
@@ -81,6 +81,7 @@ export default function CommonForm({
         e.preventDefault();
         handleSubmit();
       }}
+      className="flex flex-col"
     >
       <div className="flex flex-col gap-3 ">
         {formControls.map((controlItem) => (
@@ -92,11 +93,11 @@ export default function CommonForm({
       </div>
       <Button
         type="submit"
-        className={`mt-7 w-full cursor-pointer ${
-          isImgLoading ? 'cursor-no-drop' : 'cursor-pointer'
+        className={`mt-7 w-1/2 ml-auto mr-auto ${
+          isBtnDisabled ? 'cursor-no-drop opacity-50' : 'cursor-pointer'
         }`}
       >
-        {buttonText || 'Submit'}
+        {buttonText}
       </Button>
     </form>
   );

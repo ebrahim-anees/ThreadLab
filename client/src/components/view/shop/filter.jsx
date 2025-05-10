@@ -11,7 +11,7 @@ export default function ProductFilter({ filters, handleFilters }) {
       <div className="p-4 border-b">
         <h2 className="text-lg font-bold">Filters</h2>
       </div>
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-4 flex justify-around md:block">
         {filterKeys.map((sectionName, i) => (
           <Fragment key={sectionName}>
             <div>
@@ -23,6 +23,7 @@ export default function ProductFilter({ filters, handleFilters }) {
                     className="flex items-center gap-2 font-normal cursor-pointer"
                   >
                     <Checkbox
+                      className="cursor-pointer"
                       checked={filters[sectionName]?.includes(option.id)}
                       onCheckedChange={() =>
                         handleFilters(sectionName, option.id)
@@ -33,7 +34,9 @@ export default function ProductFilter({ filters, handleFilters }) {
                 ))}
               </div>
             </div>
-            {filterKeys.length - 1 > i && <Separator />}
+            {filterKeys.length - 1 > i && (
+              <Separator className="hidden md:block" />
+            )}
           </Fragment>
         ))}
       </div>

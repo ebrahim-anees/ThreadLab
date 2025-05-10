@@ -5,8 +5,13 @@ import cookieParser from 'cookie-parser';
 
 import { connectDB } from './configs/mongodb.js';
 import authRouter from './routes/auth/authRoutes.js';
-import adminRouter from './routes/admin/productsRoutes.js';
-import shopRouter from './routes/shop/productsRoutes.js';
+import adminProductsRouter from './routes/admin/productsRoutes.js';
+import adminOrdersRouter from './routes/admin/ordersRoutes.js';
+import shopProductRouter from './routes/shop/productsRoutes.js';
+import shopCartRouter from './routes/shop/cartRoutes.js';
+import shopAddressRouter from './routes/shop/addressRoutes.js';
+import shopOrderRouter from './routes/shop/orderRoutes.js';
+import shopSearchRouter from './routes/shop/searchRoutes.js';
 const app = express();
 await connectDB();
 app.use(
@@ -28,8 +33,13 @@ app.use(
 app.use(cookieParser());
 app.use(express.json());
 app.use('/api/auth', authRouter);
-app.use('/api/admin/products', adminRouter);
-app.use('/api/shop/products', shopRouter);
+app.use('/api/admin/products', adminProductsRouter);
+app.use('/api/admin/orders', adminOrdersRouter);
+app.use('/api/shop/products', shopProductRouter);
+app.use('/api/shop/cart', shopCartRouter);
+app.use('/api/shop/address', shopAddressRouter);
+app.use('/api/shop/order', shopOrderRouter);
+app.use('/api/shop/search', shopSearchRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Server is running on port: ' + PORT));

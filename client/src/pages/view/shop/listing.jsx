@@ -8,24 +8,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import ProductFilter from '@/components/view/shop/filter';
 import ShopProductCard from '@/components/view/shop/product/productCard';
-import ProductDetails from '@/components/view/shop/product/productDetails';
 import { sortOptions } from '@/config';
-import {
-  fetchAllProductsWithFilteration,
-  fetchProductDetails,
-} from '@/store/shop/productsSlice';
+import { fetchAllProductsWithFilteration } from '@/store/shop/productsSlice';
 import { ArrowUpDownIcon } from 'lucide-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
 
 export default function ShoppingListing() {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { productsList, productDetails } = useSelector(
-    (state) => state.shopProducts
-  );
-  const [isProductDetailsOpen, setIsProductDetailsOpen] = useState(false);
+  const { productsList } = useSelector((state) => state.shopProducts);
 
   const filters = useMemo(() => {
     const parsedFilters = {};
@@ -36,7 +29,6 @@ export default function ShoppingListing() {
     }
     return parsedFilters;
   }, [searchParams]);
-
   const sort = useMemo(
     () => searchParams.get('sort') || sortOptions[0]?.id,
     [searchParams]
@@ -63,10 +55,6 @@ export default function ShoppingListing() {
     });
   };
 
-  const getProductDetails = (productId) => {
-    dispatch(fetchProductDetails(productId));
-    setIsProductDetailsOpen(true);
-  };
   useEffect(() => {
     dispatch(
       fetchAllProductsWithFilteration({
@@ -116,21 +104,10 @@ export default function ShoppingListing() {
         <div className="grid grid-col-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {productsList?.length > 0 &&
             productsList.map((product) => (
-              <ShopProductCard
-                key={product.title}
-                product={product}
-                getProductDetails={getProductDetails}
-              />
+              <ShopProductCard key={product.title} product={product} />
             ))}
         </div>
       </div>
-      {productDetails && (
-        <ProductDetails
-          isOpen={isProductDetailsOpen}
-          setIsOpen={setIsProductDetailsOpen}
-          product={productDetails}
-        />
-      )}
     </div>
   );
 }

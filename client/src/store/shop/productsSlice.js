@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+const serverURL = import.meta.env.VITE_SERVER_URL;
 
 const initialState = {
   isLoading: false,
@@ -15,9 +16,7 @@ export const fetchAllProductsWithFilteration = createAsyncThunk(
       sortBy: sortParam,
     });
     const result = await axios.get(
-      `${
-        import.meta.env.VITE_SERVER_URL
-      }/shop/products/getAllWithFilteration?${query}`
+      `${serverURL}/shop/products/getAllWithFilteration?${query}`
     );
     return result?.data;
   }
@@ -25,9 +24,7 @@ export const fetchAllProductsWithFilteration = createAsyncThunk(
 export const fetchProductDetails = createAsyncThunk(
   '/shopProducts/fetchProductDetails',
   async (id) => {
-    const result = await axios.get(
-      `${import.meta.env.VITE_SERVER_URL}/shop/products/get/${id}`
-    );
+    const result = await axios.get(`${serverURL}/shop/products/get/${id}`);
     return result?.data;
   }
 );
@@ -35,7 +32,11 @@ export const fetchProductDetails = createAsyncThunk(
 const shopProductsSlice = createSlice({
   name: 'shopProducts',
   initialState,
-  reducers: {},
+  reducers: {
+    setProductsDetails: (state) => {
+      state.productDetails = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProductsWithFilteration.pending, (state) => {
@@ -59,8 +60,16 @@ const shopProductsSlice = createSlice({
       .addCase(fetchProductDetails.rejected, (state) => {
         state.isLoading = false;
         state.productDetails = null;
+      })
+      .addCase('shopProducts/mergeSearchResults', (state, action) => {
+        const newProducts = action.payload;
+        const existingIds = new Set(state.productsList.map((p) => p._id));
+        const uniqueProducts = newProducts.filter(
+          (p) => !existingIds.has(p._id)
+        );
+        state.productsList = [...state.productsList, ...uniqueProducts];
       });
   },
 });
-
+export const { setProductsDetails } = shopProductsSlice.actions;
 export default shopProductsSlice.reducer;

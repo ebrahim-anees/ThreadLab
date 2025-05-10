@@ -178,7 +178,7 @@ export default function AdminProducts() {
               setFormData={setFormData}
               handleSubmit={handleProduct}
               buttonText={currentEditedId === null ? 'Add' : 'Edit'}
-              isImgLoading={isImgLoading}
+              isBtnDisabled={isImgLoading}
             />
           </div>
         </SheetContent>

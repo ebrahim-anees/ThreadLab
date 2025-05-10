@@ -13,7 +13,7 @@ export default function AuthRegister() {
   const navigate = useNavigate();
 
   function handleFormSubmit() {
-    dispatch(registerUser(formState)).then((action) => {
+    dispatch(registerUser(formData)).then((action) => {
       const res = action.payload;
       if (res?.success) {
         toast(res.msg, {

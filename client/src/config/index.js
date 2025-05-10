@@ -1,7 +1,18 @@
 import {
+  BabyIcon,
+  Boxes,
   ClipboardPenLine,
+  CloudLightning,
+  Flower,
+  Goal,
+  Landmark,
   LayoutDashboard,
+  LoaderPinwheel,
+  MemoryStick,
+  ShirtIcon,
   ShoppingBasket,
+  UmbrellaIcon,
+  WatchIcon,
 } from 'lucide-react';
 
 export const formControls = [
@@ -132,27 +143,27 @@ export const shoppingHeaderMenuItems = [
   {
     id: 'men',
     label: 'Men',
-    path: '/shop/listing',
+    path: '/shop/listing?category=men',
   },
   {
     id: 'women',
     label: 'Women',
-    path: '/shop/listing',
+    path: '/shop/listing?category=women',
   },
   {
     id: 'kids',
     label: 'Kids',
-    path: '/shop/listing',
+    path: '/shop/listing?category=kids',
   },
   {
     id: 'footwear',
     label: 'Footwear',
-    path: '/shop/listing',
+    path: '/shop/listing?category=footwear',
   },
   {
     id: 'accessories',
     label: 'Accessories',
-    path: '/shop/listing',
+    path: '/shop/listing?category=accessories',
   },
   {
     id: 'search',
@@ -237,5 +248,36 @@ export const addressFormControls = [
     name: 'notes',
     componentType: 'textarea',
     placeholder: 'Enter any additional notes',
+  },
+];
+
+export const homeCategory = [
+  { id: 'men', label: 'Men', icon: ShirtIcon },
+  { id: 'women', label: 'Women', icon: CloudLightning },
+  { id: 'kids', label: 'Kids', icon: BabyIcon },
+  { id: 'accessories', label: 'Accessories', icon: WatchIcon },
+  { id: 'footwear', label: 'Footwear', icon: UmbrellaIcon },
+];
+
+export const homeBrand = [
+  { id: 'nike', label: 'Nike', icon: Goal },
+  { id: 'adidas', label: 'Adidas', icon: Landmark },
+  { id: 'puma', label: 'Puma', icon: LoaderPinwheel },
+  { id: 'levi', label: "Levi's", icon: Boxes },
+  { id: 'zara', label: 'Zara', icon: Flower },
+  { id: 'h&m', label: 'H&M', icon: MemoryStick },
+];
+export const adminOrderStatus = [
+  {
+    label: 'Order Status',
+    name: 'status',
+    componentType: 'select',
+    options: [
+      { id: 'pending', label: 'Pending' },
+      { id: 'inProcess', label: 'In Process' },
+      { id: 'inShipping', label: 'In Shipping' },
+      { id: 'delivered', label: 'Delivered' },
+      { id: 'rejected', label: 'Rejected' },
+    ],
   },
 ];
