@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { deleteAddress, fetchAllAddress } from '@/store/shop/addressSlice';
 import { toastStyles } from '@/utils/toastStyles';

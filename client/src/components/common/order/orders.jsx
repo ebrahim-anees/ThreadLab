@@ -27,7 +27,7 @@ export default function Orders() {
   } else {
     orderList = useSelector((state) => state.adminOrder).orderList;
   }
-
+  console.log(orderList, 'orderList');
   useEffect(() => {
     if (!isAdmin) {
       dispatch(getAllUserOrders(user?.id));
@@ -70,8 +70,7 @@ export default function Orders() {
                   <TableCell>
                     <Badge
                       className={`py-1 px-3 w-max ${
-                        order?.orderStatus === 'confirmed' ||
-                        order?.orderStatus === 'delivered'
+                        order?.orderStatus === 'confirmed'
                           ? 'bg-green-800'
                           : order?.orderStatus === 'rejected'
                           ? 'bg-red-600'

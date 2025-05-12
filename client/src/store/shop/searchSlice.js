@@ -22,13 +22,6 @@ export const getSearchProducts = createAsyncThunk(
     }
   }
 );
-export const fetchAllProducts = createAsyncThunk(
-  '/adminProducts/fetchAllProducts',
-  async () => {
-    const result = await axios.get(`${serverURL}/admin/products/getAll`);
-    return result?.data;
-  }
-);
 
 const shopSearchSlice = createSlice({
   name: 'shopSearch',

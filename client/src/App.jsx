@@ -44,6 +44,14 @@ export default function App() {
     <div className="flex flex-col overflow-hidden bg-white">
       <Routes>
         <URL
+          path="/"
+          element={
+            <CheckAuth>
+            </CheckAuth>
+          }
+        />
+
+        <URL
           path="/auth"
           element={
             <CheckAuth>
@@ -79,7 +87,7 @@ export default function App() {
           <URL path="checkout" element={<ShoppingCheckout />} />
           <URL path="home" element={<ShoppingHome />} />
           <URL path="listing" element={<ShoppingListing />} />
-          <URL path="search" element={<ShoppingSearch/>} />
+          <URL path="search" element={<ShoppingSearch />} />
           <URL path="paypal">
             <URL path="return" element={<PaypalReturn />} />
             <URL path="cancel" element={<PaypalCancel />} />

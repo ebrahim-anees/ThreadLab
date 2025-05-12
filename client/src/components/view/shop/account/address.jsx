@@ -14,11 +14,11 @@ import { toast } from 'sonner';
 import AddressCard from './addressCard';
 import { areObjectsEqual } from '@/lib/utils';
 export default function Address({ curSelectedAddress, setCurSelectedAddress }) {
-  const [currentAddressId, setCurrentAddressId] = useState(null);
   const initialAddressData = setInitialFormData(addressFormControls);
   const [formData, setFormData] = useState(initialAddressData);
   const { user } = useSelector((state) => state.auth);
   const { addressList } = useSelector((state) => state.shopAddress);
+  const [currentAddressId, setCurrentAddressId] = useState(null);
   const dispatch = useDispatch();
   const formRef = useRef(null);
   const addressRef = useRef(null);
@@ -111,6 +111,11 @@ export default function Address({ curSelectedAddress, setCurSelectedAddress }) {
   useEffect(() => {
     dispatch(fetchAllAddress(user?.id));
   }, [dispatch]);
+  useEffect(() => {
+    if (addressList.length === 1) {
+      setCurSelectedAddress(addressList[0]);
+    }
+  }, [addressList]);
   return (
     <Card ref={addressRef}>
       {addressList?.length > 0 ? (

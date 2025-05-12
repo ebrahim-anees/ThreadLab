@@ -12,6 +12,8 @@ import shopCartRouter from './routes/shop/cartRoutes.js';
 import shopAddressRouter from './routes/shop/addressRoutes.js';
 import shopOrderRouter from './routes/shop/orderRoutes.js';
 import shopSearchRouter from './routes/shop/searchRoutes.js';
+import productReviewRouter from './routes/shop/productReviewRoutes.js';
+import commonFeaturesRouter from './routes/common/featuresRoutes.js';
 const app = express();
 await connectDB();
 app.use(
@@ -40,6 +42,8 @@ app.use('/api/shop/cart', shopCartRouter);
 app.use('/api/shop/address', shopAddressRouter);
 app.use('/api/shop/order', shopOrderRouter);
 app.use('/api/shop/search', shopSearchRouter);
+app.use('/api/shop/review', productReviewRouter);
+app.use('/api/common/features', commonFeaturesRouter);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log('Server is running on port: ' + PORT));

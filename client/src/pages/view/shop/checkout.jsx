@@ -12,7 +12,6 @@ import { toastStyles } from '@/utils/toastStyles';
 import { createNewOrder } from '@/store/shop/orderSlice';
 export default function ShoppingCheckout() {
   const [curSelectedAddress, setCurSelectedAddress] = useState(null);
-  const [isPaymentStart, setIsPaymentStart] = useState(false);
   const [isPaymentLoading, setIsPaymentLoading] = useState(false);
   const { cartItems } = useSelector((state) => state.shopCart);
   const itemsInCart = cartItems.items;
@@ -49,9 +48,7 @@ export default function ShoppingCheckout() {
         const res = action.payload;
         setIsPaymentLoading(false);
         if (res.success) {
-          setIsPaymentStart(true);
         } else {
-          setIsPaymentStart(false);
           toast.error('Failed complete the checkout', {
             duration: 3000,
             style: toastStyles.ERROR,

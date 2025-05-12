@@ -54,6 +54,7 @@ export default function ShoppingListing() {
       return prevParams;
     });
   };
+  console.log('testingggg');
 
   useEffect(() => {
     dispatch(

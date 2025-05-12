@@ -19,6 +19,7 @@ export default function OrderDetails({ order, setIsOrderDetailOpen }) {
   );
   const user = useSelector((state) => state.auth).user;
   const isAdmin = user.role === 'admin';
+  console.log(order, 'orderSingle');
   const handleUpdateStatus = () => {
     dispatch(
       updateOrderStatus({
@@ -66,8 +67,7 @@ export default function OrderDetails({ order, setIsOrderDetailOpen }) {
                 ) : (
                   <Badge
                     className={`py-1 px-3 w-max ${
-                      order?.orderStatus === 'confirmed' ||
-                      order?.orderStatus === 'delivered'
+                      order?.orderStatus === 'confirmed'
                         ? 'bg-green-800'
                         : order?.orderStatus === 'rejected'
                         ? 'bg-red-600'

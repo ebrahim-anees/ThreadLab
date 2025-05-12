@@ -79,7 +79,6 @@ const handleCaptureOrder = async (req, res) => {
       {
         paymentStatus: 'paid', // Update payment status to 'paid'
         payerId, // Store the payerId from PayPal
-        orderStatus: 'confirmed',
         orderUpdateDate: new Date(), // Update order date to capture time
       },
       { new: true } // Return the updated order

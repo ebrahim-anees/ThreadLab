@@ -12,6 +12,7 @@ export default function ProductImgUpload({
   setUploadedImgUrl,
   isImgLoading,
   setIsImgLoading,
+  isAdminDashboard = false,
 }) {
   const inputRef = useRef(null);
 
@@ -30,6 +31,7 @@ export default function ProductImgUpload({
   function handleRemoveImg() {
     setImgFile(null);
     if (inputRef.current) inputRef.current.value = '';
+    setUploadedImgUrl(null);
   }
   async function uploadImgToCloudinary() {
     setIsImgLoading(true);
@@ -49,7 +51,9 @@ export default function ProductImgUpload({
     imgFile === null ? handleRemoveImg() : uploadImgToCloudinary();
   }, [imgFile]);
   return (
-    <div className="w-full max-w-md mx-auto px-6">
+    <div
+      className={`w-full ${isAdminDashboard ? '' : 'max-w-md mx-auto'} px-6`}
+    >
       <Label className="text-lg font-semibold mb-2 block">Upload Image</Label>
       {isImgLoading ? (
         <div className="h-24 relative">

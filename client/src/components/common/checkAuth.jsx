@@ -7,7 +7,19 @@ export default function CheckAuth({ children }) {
     (state) => state.auth
   );
   const location = useLocation();
-  // if (!hasCheckedAuthOnce) return <Loading />;
+  console.log(location);
+
+  if (location.pathname === '/') {
+    if (!isAuthenticated) {
+      return <Navigate to="/auth/login" />;
+    } else {
+      if (user?.role === 'admin') {
+        return <Navigate to="/admin/dashboard" />;
+      } else {
+        return <Navigate to="/shop/home" />;
+      }
+    }
+  }
   if (
     !isAuthenticated &&
     !(
