@@ -19,7 +19,7 @@ await connectDB();
 app.use(
   /// CORS (Cross-Origin Resource Sharing) allows your backend to accept requests from different domains (like your frontend running on localhost:5173 — probably Vite or React).
   cors({
-    origin: 'http://localhost:5173', /// Only allow requests from this frontend URL
+    origin: 'http://localhost:5174', /// Only allow requests from this frontend URL
     methods: ['GET', 'POST', 'DELETE', 'PUT'], ///  Allow these HTTP methods
     allowedHeaders: [
       /// Headers allowed in requests
