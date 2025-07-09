@@ -15,7 +15,13 @@ import shopSearchRouter from './routes/shop/searchRoutes.js';
 import productReviewRouter from './routes/shop/productReviewRoutes.js';
 import commonFeaturesRouter from './routes/common/featuresRoutes.js';
 const app = express();
-await connectDB();
+try {
+  await connectDB();
+  console.log('✅ Connected to MongoDB');
+} catch (err) {
+  console.error('❌ Failed to connect to MongoDB:', err);
+  // Optionally rethrow or handle
+}
 app.use(
   /// CORS (Cross-Origin Resource Sharing) allows your backend to accept requests from different domains (like your frontend running on localhost:5173 — probably Vite or React).
   cors({
