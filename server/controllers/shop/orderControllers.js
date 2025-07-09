@@ -1,4 +1,4 @@
-import { createPaypalOrder, capturePaypalOrder } from '../../configs/payPal.js';
+import { createPaypalOrder, capturePaypalOrder } from '../../configs/paypal.js';
 import Order from '../../models/Order.js';
 import Cart from '../../models/Cart.js';
 import Product from '../../models/Product.js';
