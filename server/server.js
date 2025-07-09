@@ -38,9 +38,13 @@ app.use(
     credentials: true, /// this tells the browser to send cookies/auth
   })
 );
+console.log('🟣 Middleware setup complete');
+
 app.use(cookieParser());
 app.use(express.json());
 app.get('/', (req, res) => res.send('API works!'));
+
+console.log('🟠 Registering routes...');
 app.use('/api/auth', authRouter);
 app.use('/api/admin/products', adminProductsRouter);
 app.use('/api/admin/orders', adminOrdersRouter);
@@ -52,6 +56,9 @@ app.use('/api/shop/search', shopSearchRouter);
 app.use('/api/shop/review', productReviewRouter);
 app.use('/api/common/features', commonFeaturesRouter);
 
+console.log('✅ All routes registered');
+
 const PORT = process.env.PORT || 5000;
 // app.listen(PORT, () => console.log('Server is running on port: ' + PORT));
+
 export default app;
